@@ -6,7 +6,7 @@ using UnityEngine.Rendering.Universal;
 public class OutlineDitectRenderPass : ScriptableRenderPass
 {
     private const string CommandBufferName = nameof(OutlineDitectRenderPass);
-    
+
     // 描画に使用するマテリアル
     private readonly Material _material;
 
@@ -23,6 +23,7 @@ public class OutlineDitectRenderPass : ScriptableRenderPass
         _material = blitMaterial;
         _tempTexture = new RenderTargetHandle();
         _tempTexture.Init("_TemporaryColorTexture");
+       // _tempTexture.Init("_CameraDepthTexture");
     }
 
     // 初期化
@@ -37,7 +38,7 @@ public class OutlineDitectRenderPass : ScriptableRenderPass
         // CommandBufferを取得
         var commandBuffer = CommandBufferPool.Get(CommandBufferName);
 
-      
+
         // CameraのTargetと同じ設定のテクスチャを新しく取得する
         commandBuffer.GetTemporaryRT(_tempTexture.id, renderingData.cameraData.cameraTargetDescriptor);
 
